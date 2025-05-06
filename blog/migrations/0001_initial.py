@@ -4,7 +4,7 @@ import datetime
 from django.conf import settings
 from django.db import migrations, models
 import django.db.models.deletion
-from django.utils.timezone import utc
+from django.utils import timezone  # Changed import
 
 
 class Migration(migrations.Migration):
@@ -22,7 +22,7 @@ class Migration(migrations.Migration):
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('title', models.CharField(max_length=256)),
                 ('text', models.TextField()),
-                ('create_date', models.DateTimeField(default=datetime.datetime(2025, 4, 28, 16, 12, 29, 200875, tzinfo=utc))),
+                ('create_date', models.DateTimeField(default=timezone.now)),  # Changed default
                 ('published_date', models.DateTimeField(blank=True, null=True)),
                 ('author', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
@@ -33,7 +33,7 @@ class Migration(migrations.Migration):
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('author', models.CharField(max_length=128)),
                 ('text', models.TextField()),
-                ('create_date', models.DateTimeField(default=datetime.datetime(2025, 4, 28, 16, 12, 29, 201876, tzinfo=utc))),
+                ('create_date', models.DateTimeField(default=timezone.now)),  # Changed default
                 ('approved_comment', models.BooleanField(default=False)),
                 ('post', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='comments', to='blog.post')),
             ],
